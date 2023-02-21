@@ -1,61 +1,13 @@
 import "./styles.css";
-
-const data = [
-  {
-    skill: "JavaScript",
-    "2010": 0,
-    "2011": 0,
-    "2012": 1,
-    "2013": 1,
-    "2014": 1,
-    "2015": 2,
-    "2016": 1,
-    "2017": 0,
-    "2018": 0,
-    "2019": 0
-  },
-  {
-    skill: "HTML",
-    "2010": 0,
-    "2011": 0,
-    "2012": 1,
-    "2013": 1,
-    "2014": 2,
-    "2015": 2,
-    "2016": 2,
-    "2017": 1,
-    "2018": 0,
-    "2019": 0
-  },
-  {
-    skill: "CSS",
-    "2010": 0,
-    "2011": 0,
-    "2012": 1,
-    "2013": 1,
-    "2014": 1,
-    "2015": 2,
-    "2016": 2,
-    "2017": 1,
-    "2018": 0,
-    "2019": 0
-  },
-  {
-    skill: "React",
-    "2010": 0,
-    "2011": 0,
-    "2012": 0,
-    "2013": 0,
-    "2014": 0,
-    "2015": 1,
-    "2016": 2,
-    "2017": 2,
-    "2018": 2,
-    "2019": 2
-  }
-];
+import { data } from "./skills-data";
 
 const visualization = document.getElementById("visualization");
+const rangeInput = document.getElementById("range");
+const minYear = Math.min(...data.map((d) => parseInt(Object.keys(d).slice(1))));
+const maxYear = Math.max(...data.map((d) => parseInt(Object.keys(d).slice(1))));
+rangeInput.min = minYear;
+rangeInput.max = maxYear;
+rangeInput.value = `${maxYear}`;
 
 function createVisualization(data, startYear, endYear) {
   // Remove any columns that are already in the visualization
@@ -90,8 +42,7 @@ function createVisualization(data, startYear, endYear) {
 
     // Loop through the years and create a box for each instance of the skill
     years.forEach((year) => {
-      const count = skillData[year];
-      for (let i = 0; i < count; i++) {
+      if (skillData[year] > 0) {
         const box = document.createElement("div");
         box.className = "box";
         column.appendChild(box);
@@ -109,12 +60,13 @@ function createVisualization(data, startYear, endYear) {
 }
 
 // Initial visualization with all years
-createVisualization(data, 2015, 2019);
+createVisualization(data, 2000, 2023);
 
-// Add event listener to the range input to update visualization on change
-// const rangeInput = document.getElementById('range');
-// rangeInput.addEventListener('input', (event) => {
-//   const startYear = parseInt(rangeInput.value.split(',')[0]);
-//   const endYear = parseInt(rangeInput.value.split(',')[1]);
-//   createVisualization(data, startYear, endYear);
+//Add event listener to the range input to update visualization on change
+
+// rangeInput.addEventListener("input", (event) => {
+//   //const startYear = parseInt(rangeInput.value.split(",")[0]);
+//   const endYear = parseInt(rangeInput.value.split(",")[1]);
+//   //createVisualization(data, startYear, endYear);
+//   createVisualization(data, 2015, 2011);
 // });
