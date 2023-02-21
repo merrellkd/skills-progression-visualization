@@ -1,0 +1,22 @@
+body {
+  font-family: sans-serif;
+}
+#visualization {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.box {
+  width: 40px;
+  height: 20px;
+  margin: 2px;
+  background-color: #4caf50;
+}
