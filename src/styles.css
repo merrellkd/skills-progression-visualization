@@ -20,3 +20,9 @@ body {
   margin: 2px;
   background-color: #4caf50;
 }
+
+.column > div:first-child {
+  writing-mode: vertical-lr; /* Turns text on its side */
+  transform: rotate(180deg); /* Flips the text to extend down */
+  margin-top: 60px; /* Adds space between boxes and label */
+}

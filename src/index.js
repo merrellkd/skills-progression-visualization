@@ -2,12 +2,6 @@ import "./styles.css";
 import { data } from "./skills-data";
 
 const visualization = document.getElementById("visualization");
-const rangeInput = document.getElementById("range");
-const minYear = Math.min(...data.map((d) => parseInt(Object.keys(d).slice(1))));
-const maxYear = Math.max(...data.map((d) => parseInt(Object.keys(d).slice(1))));
-rangeInput.min = minYear;
-rangeInput.max = maxYear;
-rangeInput.value = `${maxYear}`;
 
 function createVisualization(data, startYear, endYear) {
   // Remove any columns that are already in the visualization
@@ -39,7 +33,10 @@ function createVisualization(data, startYear, endYear) {
     const years = Object.keys(skillData).filter((key) => key !== "skill");
     const column = document.createElement("div");
     column.className = "column";
-
+    // Add the skill name to the column
+    const label = document.createElement("div");
+    label.textContent = skill;
+    column.appendChild(label);
     // Loop through the years and create a box for each instance of the skill
     years.forEach((year) => {
       if (skillData[year] > 0) {
@@ -48,11 +45,6 @@ function createVisualization(data, startYear, endYear) {
         column.appendChild(box);
       }
     });
-
-    // Add the skill name to the column
-    const label = document.createElement("div");
-    label.textContent = skill;
-    column.appendChild(label);
 
     // Add the column to the visualization container
     visualization.appendChild(column);
